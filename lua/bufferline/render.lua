@@ -103,6 +103,7 @@ local function render(update_names)
   local has_icons = (opts.icons == true) or (opts.icons == 'both')
   local has_icon_custom_colors = opts.icon_custom_colors
   local has_numbers = (opts.icons == 'numbers') or (opts.icons == 'both')
+  local has_diagnostic = opts.diagnostic == 'nvim-lsp'
 
   local layout = Layout.calculate(state)
 
@@ -148,8 +149,12 @@ local function render(update_names)
     local iconPrefix = ''
     local icon = ''
 
+    -- The diagnostic indicators
+    local diagnosticPrefix = ''
+    local diagnostic = ''
+
     if has_numbers then
-      local number_text = tostring(i)
+      local number_text = 'JROBB'
       bufferIndexPrefix = hl('Buffer' .. status .. 'Index')
       bufferIndex = number_text .. ' '
     end
@@ -173,6 +178,11 @@ local function render(update_names)
         iconPrefix = has_icon_custom_colors and hl('Buffer' .. status .. 'Icon') or hlName and hl(hlName) or namePrefix
         icon = iconChar .. ' '
       end
+    end
+
+    if has_diagnostic then
+      diagnosticPrefix = hl('WarningMsg')
+      diagnostic = 'JROBB'
     end
 
     local closePrefix = ''
@@ -211,6 +221,7 @@ local function render(update_names)
         {iconPrefix,         icon},
         {jumpLetterPrefix,   jumpLetter},
         {namePrefix,         name},
+        {diagnosticPrefix,   diagnostic},
         {'',                 padding},
         {'',                 ' '},
         {closePrefix,        close},

@@ -172,6 +172,10 @@ let bufferline.icons = v:true
 " If false, will use nvim-web-devicons colors
 let bufferline.icon_custom_colors = v:false
 
+" Toggles diagnostic indicators.
+" If false, indicators will not be shown
+let bufferline.diagnostic = "nvim-lsp"
+
 " Configure icons on the bufferline.
 let bufferline.icon_separator_active = '▎'
 let bufferline.icon_separator_inactive = '▎'
